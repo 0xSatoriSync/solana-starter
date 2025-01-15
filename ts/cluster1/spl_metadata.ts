@@ -1,4 +1,4 @@
-import wallet from "../../wallets/dev-wallet.json"
+import wallet from "../../wallets/turbin3-wallet.json"
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
 import { 
     createMetadataAccountV3, 
@@ -10,7 +10,7 @@ import { createSignerFromKeypair, signerIdentity, publicKey } from "@metaplex-fo
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 
 // Define our Mint address
-const mint = publicKey("<mint address>")
+const mint = publicKey("8MeovqDNj1M7qCdzJ1uaAUvQrCdSn2E9f5o95dPwMPyo")
 
 // Create a UMI connection
 const umi = createUmi('https://api.devnet.solana.com');
@@ -20,30 +20,48 @@ umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
 
 (async () => {
     try {
-        // Start here
-        // let accounts: CreateMetadataAccountV3InstructionAccounts = {
-        //     ???
-        // }
 
-        // let data: DataV2Args = {
-        //     ???
-        // }
+        // Create metadata account accounts
+        let accounts: CreateMetadataAccountV3InstructionAccounts = {
+            mint: mint,
+            mintAuthority: signer
+        }
 
-        // let args: CreateMetadataAccountV3InstructionArgs = {
-        //     ???
-        // }
+        // Create metadata account data
+        let data: DataV2Args = {
+            name: "Turbin3",
+            symbol: "TURB",
+            uri: "https://turbin3.com",
+            sellerFeeBasisPoints: 500,
+            creators: null,
+            collection: null,
+            uses: null
+        }
 
-        // let tx = createMetadataAccountV3(
-        //     umi,
-        //     {
-        //         ...accounts,
-        //         ...args
-        //     }
-        // )
+        // Create metadata account args
+        let args: CreateMetadataAccountV3InstructionArgs = {
+            data: data,
+            isMutable: true,
+            collectionDetails: null,
+        }
 
-        // let result = await tx.sendAndConfirm(umi);
-        // console.log(bs58.encode(result.signature));
+        // Create metadata account transaction
+        let tx = createMetadataAccountV3(
+            umi,
+            {
+                ...accounts,  // spreads: { mint, mintAuthority }
+                ...args      // spreads: { data, isMutable, collectionDetails }
+            }
+        )
+
+        // Send and print metadata account transaction
+        let result = await tx.sendAndConfirm(umi);
+        console.log(bs58.encode(result.signature));
+
     } catch(e) {
         console.error(`Oops, something went wrong: ${e}`)
     }
 })();
+
+// Latest Output:
+// RbUBA23mfTweBNqxJ1j6842SwVkyeNrPsN2G4cVD1uHcNtCXAd1BX1zT3x39pWcnVaxdGmEVMNVtNezorSgLH7V

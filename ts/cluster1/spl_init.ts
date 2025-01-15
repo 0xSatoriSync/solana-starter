@@ -24,3 +24,6 @@ const connection = new Connection("https://api.devnet.solana.com", commitment);
         console.log(`Oops, something went wrong: ${error}`)
     }
 })()
+
+// Latest Output:
+// Mint: 8MeovqDNj1M7qCdzJ1uaAUvQrCdSn2E9f5o95dPwMPyo
