@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "lib": ["es2020"],
+    "lib": [
+      "es2020"
+    ],
     "module": "commonjs",
     "rootDir": "./",
     "resolveJsonModule": true,
@@ -10,6 +12,17 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": [
+    "prereqs/**/*",
+    "tools/**/*",
+    "programs/**/*",
+    "cluster1/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

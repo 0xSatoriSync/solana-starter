@@ -1,7 +1,7 @@
 import { Connection, Keypair, SystemProgram, PublicKey } from "@solana/web3.js"
-import { Program, Wallet, AnchorProvider, Address } from "@project-serum/anchor"
+import { Program, Wallet, AnchorProvider, Address } from "@coral-xyz/anchor"
 import { WbaPrereq, IDL } from "../programs/wba_prereq";
-import wallet from "../wba-wallet.json"
+import wallet from "../../wallets/turbin3-wallet.json"
 
 // We're going to import our keypair from the wallet file
 const keypair = Keypair.fromSecretKey(new Uint8Array(wallet));

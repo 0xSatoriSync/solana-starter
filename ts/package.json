@@ -24,7 +24,10 @@
     "vault_withdraw_spl": "ts-node ./cluster1/vault_withdraw_spl.ts",
     "vault_deposit_nft": "ts-node ./cluster1/vault_deposit_nft.ts",
     "vault_withdraw_nft": "ts-node ./cluster1/vault_withdraw_nft.ts",
-    "vault_close": "ts-node ./cluster1/vault_close.ts"
+    "vault_close": "ts-node ./cluster1/vault_close.ts",
+    "build_all": "tsc",
+    "build": "tsc",
+    "build:single": "ts-node tools/compile-single.ts"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.29.0",
@@ -42,5 +45,6 @@
   },
   "devDependencies": {
     "ts-node": "^10.9.1"
-  }
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
