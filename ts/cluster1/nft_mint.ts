@@ -14,13 +14,28 @@ umi.use(signerIdentity(myKeypairSigner));
 umi.use(mplTokenMetadata())
 
 const mint = generateSigner(umi);
+const metadata_uri = "https://devnet.irys.xyz/C2WHtgsrh1wyvF2xdg7AuLJRz7Tn4vLRGb4tKeTyiHQc";
 
 (async () => {
-    // let tx = ???
-    // let result = await tx.sendAndConfirm(umi);
-    // const signature = base58.encode(result.signature);
+    let tx = createNft(umi, {
+        mint: mint,
+        name: "Llama Rug",
+        symbol: "LLAMARUG",
+        uri: metadata_uri,
+        sellerFeeBasisPoints: percentAmount(10),
+        creators: [{
+            address: keypair.publicKey,
+            verified: false,
+            share: 100
+        }]
+    });
+    let result = await tx.sendAndConfirm(umi);
+    const signature = base58.encode(result.signature);
     
-    // console.log(`Succesfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
-
+    console.log(`Succesfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
     console.log("Mint Address: ", mint.publicKey);
 })();
+
+// Succesfully Minted! Check out your TX here:
+// https://explorer.solana.com/tx/4Sy9BMtXZdrT8M5d2vSd9sf6Z3w7Ni86Xea3PsueBKGQJyuEexqu9wsDad1JKU1hV6r1RXFWRuNfuqua2VQQ6eDC?cluster=devnet
+// Mint Address:  H1aYDg56NBrFRfUC2uUoHevSg486Uo96zTRq6okrQAgR
